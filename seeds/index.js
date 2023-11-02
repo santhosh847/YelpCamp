@@ -3,7 +3,9 @@ const Campground = require("../models/campground");
 const cities = require("./cities");
 const { descriptors, places } = require("./seedhelpers");
 
-mongoose.connect("mongodb://localhost:27017/yelp-camp");
+require("dotenv").config();
+
+mongoose.connect(process.env.ATLAS_URL);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -13,15 +15,14 @@ db.once("open", () => {
 
 //fn. to get random element from array
 const randItem = (array) => array[Math.floor(Math.random() * array.length)];
-
 const seedDB = async () => {
 	//overwrite old ones
-	await Campground.deleteMany({});
-	//write new 50 camps
-	for (let i = 0; i < 500; i++) {
+	// await Campground.deleteMany({});
+	// write new 50 camps
+	for (let i = 0; i < 50; i++) {
 		const randCity = randItem(cities);
 		const camp = new Campground({
-			author: "6489c8dabb7e7de17d895910",
+			author: "649aaa46268e91eb33e60f9b",
 			location: `${randCity.city}, ${randCity.state}`,
 			title: `${randItem(descriptors)} ${randItem(places)}`,
 			geometry: {

@@ -32,9 +32,33 @@
 
 <% } %>
 
+<div class="text-center">
+	<a href="/campgrounds?page=<%= pages.current - 1%>" class="btn" style="<%=pages.current==1?"pointer-events: none; color: grey;": ""%>"> < </a>
+	<a href="/campgrounds?page=<%= 1 %>" class = "btn <%= pages.current==1?"btn-primary":"btn-secondary"  %>">1</a>
+	<%# Previous a %> <% if(pages.current-1>2) { %> ...
+	<a href="/campgrounds?page=<%= pages.current-1 %>" class = "btn btn-secondary"><%=pages.current-1%></a>
+	<% } else if(pages.current-1 == 2) {%>
+	<a href="/campgrounds?page=<%= pages.current-1%>" class = "btn btn-secondary"><%=pages.current-1%></a>
+	<% } %> 
+	<%# current page %> 
+	<% if(pages.current !== 1 && pages.current !==
+	pages.total) { %>
+	<a href="/campgrounds?page=<%= pages.current %>" class = "btn btn-primary"><%=pages.current%></a>
+	<%}%> 
+	<%# Next a %>
+	<%if(pages.current+1==pages.total-1) { %>
+	<a href="/campgrounds?page=<%= pages.current+1 %>" class = "btn btn-secondary"><%=pages.current+1%></a>
+	<% } else if(pages.current+1<pages.total-1) {%>
+	<a href="/campgrounds?page=<%= pages.current+1 %>" class = "btn btn-secondary"><%=pages.current+1%></a>
+	...
+	<% } %> 
+	<a href="/campgrounds?page=<%= pages.total %>" class = "btn <%= pages.current==pages.total?"btn-primary":"btn-secondary"%>"><%=pages.total%></a>
+	<a href="/campgrounds?page=<%= pages.current+1 %>" class="btn" style= "<%=pages.current==pages.total?"pointer-events: none; color: grey;": ""%>" > > </a>
+</div>
+
 <script>
-	const mapboxToken = '<%=process.env.MAPBOX_TOKEN%>';
-	const campgrounds ={features: <%-JSON.stringify(campgrounds)%>}
+	const mapboxToken = "<%=process.env.MAPBOX_TOKEN%>";
+	const campgrounds = { features: JSON.stringify(campgrounds) };
 </script>
 
 <script src="/scripts/clusterMap.js"></script>

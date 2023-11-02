@@ -1,3 +1,7 @@
 {
-	"livePreview.defaultPreviewPath": "/views/campgrounds/new.ejs"
+	"livePreview.defaultPreviewPath": "/views/campgrounds/new.ejs",
+	"files.associations": {
+		"*.ejs": "html",
+		"unordered_map": "cpp"
+	}
 }
